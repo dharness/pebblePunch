@@ -27,7 +27,7 @@ database.log = function(jsonData, callback){
 						if(err) response['error'] = err;
 					});
 			getHighScore(response,score,function(response){
-				res.send(response);
+				callback(response);
 			});
 		} else {
 			// get your last high score
