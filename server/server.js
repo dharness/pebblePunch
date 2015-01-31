@@ -10,17 +10,18 @@ var mongoose  = require('mongoose');
 var HighScore     = require('./models/Score');
 var codeId = 1;
 
+var sockets = require('./lib/sockets');
+
 
 app.get('/',function(req,res){
 	console.log("GET received");
-	var data = '';
-	req.on('data',function(chunk){
-		data += chunk;
-	});
-	req.on('end',function(chunk){
-		console.log(data);
-	});
-	res.send('hello world.');
+	res.sendFile('view/index.html', {root: __dirname} );
+});
+app.get('/js/:var',function(req,res){
+	res.sendFile('view/js/'+req.param('var'), {root: __dirname} );
+});
+app.get('/images/:var',function(req,res){
+	res.sendFile('view/images/'+req.param('var'), {root: __dirname} );
 });
 app.post('/',function(req,res){
 	var data = '';
@@ -31,8 +32,18 @@ app.post('/',function(req,res){
 	req.on('end',function(){
 		console.log(data);
 		try{
+			// RESPOND TO PUNCH
+			var src		 = req.ip;
+			sockets.punch(src);
+			// LOG PUNCH
 			var jsonData = JSON.parse(data);
-			var scoreVal = Math.sqrt((jsonData.magX*jsonData.magX) +(jsonData.magY*jsonData.magY) +(jsonData.magZ*jsonData.magZ));
+			var scoreVal
+
+			if(typeof jsonData.magX !== 'undefined') {
+				scoreVal = Math.sqrt((jsonData.magX*jsonData.magX) +(jsonData.magY*jsonData.magY) +(jsonData.magZ*jsonData.magZ));
+			} else {
+				scoreVal = jsonData.magnitude;
+			}
 			var response = {};
 			response['newHighScore'] = false;
 			HighScore.count({_id: jsonData.id}, function (err, count) {
@@ -81,7 +92,6 @@ app.post('/',function(req,res){
 
 function getHighScore(response,scoreItem, callback){
 	//get the high score and send it back
-	console.log(response);
 	response['personalHighScore'] = scoreItem.score;
 	HighScore.count({	
 						_id:{'$ne': scoreItem._id }, 
@@ -99,9 +109,21 @@ function getHighScore(response,scoreItem, callback){
 		});
 }
 
+// ============= 		SOCKET SETUP	 	============= //
+io.on('connection',function(socket){
+	activeUsers++;
+	console.log('active users:' + activeUsers);
+	socket.on('disconnect', function(){
+		activeUsers--;
+    	console.log('active users:' + activeUsers);
+    	sockets.remove(sockets.extractSessionId(socket))
+  	});
+  	socket.emit("identify",sockets.extractSessionId(socket));
+  	sockets.save(socket);
+});
 
 
-// ========= LOAD CONFIG AND LAUNCH ============= //
+// ============= 	LOAD CONFIG AND LAUNCH	 ============= //
 var configDB = require('./config/database');
 mongoose.connect(configDB.url);
 fs.exists('config/config.js',function(exists){
