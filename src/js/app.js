@@ -10,19 +10,19 @@ var Accel = require('ui/accel');
 var ajax = require('ajax');
 var Vibe = require('ui/vibe');
 Accel.init();
-canPunch = true;
+canPunch = false;
 puncher = Pebble.getWatchToken();
 
-    // -------------------- ENGINE --------------------
+// -------------------- ENGINE --------------------
 
 var Engine = {
-
     //takes an array of data and determines if a punch has occurred
-    lookForPunch: function(accels, callback) {    
-        for (var i = 0; i < accels.length && canPunch; i+=2) {
-            var magS = accels[i].x + accels[i+1].x;
+    lookForPunch: function(accels, callback) {
+        // console.log(canPunch)
+        for (var i = 0; i < accels.length && canPunch; i += 2) {
+            var magS = accels[i].x + accels[i + 1].x;
             if (magS > 2000) {
-                // console.log('PUNCH' + magS);
+                console.log('PUNCH' + magS);
                 callback(magS);
                 return;
             }
@@ -41,8 +41,7 @@ var Engine = {
                 contentType: "application/json; charset=utf-8",
             },
             function(data) {
-                // Success!
-                console.log(data);
+                // console.log(data);
             },
             function(error) {
                 // Failure!
@@ -81,6 +80,10 @@ var img = new UI.Image({
     image: 'images/home-128.png'
 });
 
+var wind = new UI.Window({
+    fullscreen: true
+});
+
 // Create the Menu, supplying the list of fruits
 var MainMenu = new UI.Menu({
     sections: [{
@@ -96,17 +99,19 @@ MainMenu.on('select', function(event) {
     Vibe.vibrate('short');
 
     if (mitems[event.itemIndex].title == "Punch!") {
-        var detailCard = new UI.Card({
-            icon: 'images/menu_icon.png'
-        });
+        canPunch = true;
+        console.log(Pebble)
 
+        var detailCard = new UI.Card({
+            title: 'Your Highscore is: ' + 'highScore',
+            subtitle: ''
+        });
         detailCard.show();
+
     } else if (mitems[event.itemIndex].title == "High Score") {
-        var detailCard = new UI.Card({
-            title: 'wooot'
-        });
+        wind.add(img);
+        wind.show();
 
-        detailCard.show();
     } else if (mitems[event.itemIndex].title == "About") {
         var detailCard = new UI.Menu({
             sections: [{
