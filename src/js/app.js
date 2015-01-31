@@ -10,14 +10,33 @@ var Accel = require('ui/accel');
 var ajax = require('ajax');
 Accel.init();
 
+// -------------------- Engine -------------------- 
+
+// A computational engine
+var Engine = {
+
+	//takes an array of data and determines if a punch has occurred
+	lookForPunch: function(accels) {
+		var diff = 20; // the difference which defines a peak
+		var threshHold = 100; // the minimum magnitude for a punch
+
+		for (var i =0; i < accels.length; i++){
+			var a = accels[i]; // grab the current acceloration
+			console.log (a.x + ' ' +a.y +' ' + a.z)
+			var m = Math.sqrt(a.x*a.x + a.y*a.y + a.z*a.z); //compute the magnitude of the vector
+			console.log('magnitude: ------> ' + m);
+		}
+	}
+}
+
+
 // -------------------- UI -------------------- 
 
-
 var main = new UI.Card({
-  title: 'Pebble.js',
-  icon: 'images/menu_icon.png',
-  subtitle: 'Hello Dylan!',
-  body: 'Press any button.'
+	title: 'Pebble.js',
+	icon: 'images/menu_icon.png',
+	subtitle: 'Hello Dylan!',
+	body: 'Press any button.'
 });
 
 main.show();
@@ -25,48 +44,12 @@ main.show();
 // -------------------- ACCELOROMETER --------------------
 
 Accel.config({
-  rate: 25,
-  samples: 25,
-  subscribe: true,
+	rate: 25,
+	samples: 25,
+	subscribe: true,
 });
 
+// subscription listening for punches
 Accel.on('data', function(e) {
-  console.log('Just received ' + e.accels + ' from the accelerometer.');
+	Engine.lookForPunch(e.accels);
 });
-
-// Accel.on('tap', function(e) {
-
-//   var data = {};
-
-//   Accel.peek(function(e) {
-
-//     var sendData = {
-//       magX : e.accel.x,
-//       magY: e.accel.y,
-//       magZ: e.accel.z,
-//       id: 'sampleID'
-//     };
-
-//     console.log(JSON.stringify(sendData));
-
-//     ajax(
-//       {
-//         url: 'http://104.131.88.222:6113',
-//         method: 'POST',
-//         data: sendData,
-//         type: 'json',
-//         contentType: "application/json; charset=utf-8",
-// },
-//       function(data) {
-//         // Success!
-//         console.log(data);
-//       },
-//       function(error) {
-//         // Failure!
-//         console.log('Failed fetching weather data: ' + error);
-//       }
-//     );
-
-//   });
-
-// });
