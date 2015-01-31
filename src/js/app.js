@@ -15,46 +15,49 @@ Accel.init();
 
 var Engine = {
 
-  //takes an array of data and determines if a punch has occurred
-  lookForPunch: function(accels) {
-    var diff = 20; // the difference which defines a peak
-    var threshHold = 100; // the minimum magnitude for a punch
+    //takes an array of data and determines if a punch has occurred
+    lookForPunch: function(accels) {
+        var diff = 20; // the difference which defines a peak
+        var threshHold = 100; // the minimum magnitude for a punch
 
-    for (var i = 1; i < accels.length; i++) {
+        for (var i = 1; i < accels.length; i++) {
 
-      var a = accels[i]; // grab the current acceloration
-      var _a = accels[i - 1]; // grab the current acceloration
+            var a = accels[i]; // grab the current acceloration
+            var _a = accels[i - 1]; // grab the current acceloration
 
-      var magS = a.x + ' ' + a.y + ' ' + a.z;
-      var _magS = _a.x + ' ' + _a.y + ' ' + _a.z;
+            var magS = a.x + ' ' + a.y + ' ' + a.z;
+            var _magS = _a.x + ' ' + _a.y + ' ' + _a.z;
 
-      if (Math.abs(magS - _magS) > 15000000) {
-        var m = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z); //compute the magnitude of the vector
-        console.log('PUNCH')
-        this.sendPunch();
-      }
+            if (Math.abs(magS - _magS) > 1500000000000) {
+                var m = Math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z); //compute the magnitude of the vector
+                console.log('PUNCH');
+                return m;
+            }
 
-    }
-  },
+        }
+    },
 
-  sendPunch: function() {
+    sendPunch: function(punch, puncher) {
         ajax({
-        url: 'http://104.131.88.222:6113',
-        method: 'POST',
-        data: sendData,
-        type: 'json',
-        contentType: "application/json; charset=utf-8",
-      },
-      function(data) {
-        // Success!
-        console.log('Successfully fetched weather data!');
-      },
-      function(error) {
-        // Failure!
-        console.log('Failed fetching weather data: ' + error);
-      }
-    );
-  }
+                url: 'http://104.131.88.222:6113',
+                method: 'POST',
+                data: {
+                    id: puncher,
+                    magnitude: punch
+                },
+                type: 'json',
+                contentType: "application/json; charset=utf-8",
+            },
+            function(data) {
+                // Success!
+                console.log('Successfully fetched weather data!');
+            },
+            function(error) {
+                // Failure!
+                console.log('Failed fetching weather data: ' + error);
+            }
+        );
+    }
 }
 
 
@@ -98,12 +101,14 @@ MainMenu.on('select', function(event) {
 // -------------------- ACCELOROMETER --------------------
 
 Accel.config({
-  rate: 25,
-  samples: 25,
-  subscribe: true,
+    rate: 25,
+    samples: 25,
+    subscribe: true,
 });
 
 // subscription listening for punches
 Accel.on('data', function(e) {
-  Engine.lookForPunch(e.accels);
+    var puncher = Pebble.getWatchToken();
+    var punch = Engine.lookForPunch(e.accels);
+    Engine.sendPunch(punch, puncher);
 });
