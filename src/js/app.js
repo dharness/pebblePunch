@@ -59,12 +59,21 @@ MainMenu.show();
 MainMenu.on('select', function(event) {
     Vibe.vibrate('short');
 
+    if (mitems[event.itemIndex].title == "Punch!") {
+        var detailCard = new UI.Card({
+            title: mitems[event.itemIndex].title
+        });
+
+        detailCard.show();
+    }
+
+
     // Show a card with clicked item details
-    var detailCard = new UI.Card({
-        title: mitems[event.itemIndex].title
-        //icon: 'resources/images/punch.png.pbi'
-    });
-    detailCard.show();
+    // var detailCard = new UI.Card({
+    //     title: mitems[event.itemIndex].title
+    //icon: 'resources/images/punch.png.pbi'
+    // });
+    // detailCard.show();
 
 });
 
