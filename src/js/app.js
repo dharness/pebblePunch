@@ -116,12 +116,12 @@ MainMenu.on('select', function(event) {
         canPunch = true;
 
         var win = new UI.Window();
-        var img = new UI.Image({
-            image: 'images/home-128.png'
-        });
+        // var img = new UI.Image({
+        //     image: 'images/home-128.png'
+        // });
 
-        win.add(img);
-        win.remove(img);
+        // win.add(img);
+        // win.remove(img);
         win.show();
         // punchCard.show();
 
@@ -137,6 +137,30 @@ MainMenu.on('select', function(event) {
                 title: 'Menu',
                 items: us
             }]
+        });
+
+        detailCard.on('select', function(event) {
+            Vibe.vibrate('short');
+            if (us[event.itemIndex].title == "Ryan Holmes") {
+                //ryan about page
+                var win = new UI.Window();
+                var img = new UI.Image({
+                    image: 'images/home-128.png'
+                });
+
+                win.add(img);
+                win.remove(img);
+                win.show();
+                // punchCard.show();
+
+
+            } else if (us[event.itemIndex].title == "Dylan Harness") {
+                //dylan about page
+
+            } else {
+                //hannes about page
+
+            }
         });
 
         detailCard.show();
