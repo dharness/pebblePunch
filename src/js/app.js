@@ -19,6 +19,7 @@ var punchCard = new UI.Card({
 
 // -------------------- ENGINE --------------------
 
+
 var Engine = {
     //takes an array of data and determines if a punch has occurred
     lookForPunch: function(accels, callback) {
@@ -48,6 +49,7 @@ var Engine = {
                 punchCard.title('Highscore: ' + data.highScore);
                 punchCard.subtitle('Score: ' + punch);
                 punchCard.icon('images/menu_icon.png');
+                Vibe.vibrate('short');
             },
             function(error) {
                 // Failure!
@@ -78,13 +80,21 @@ var us = [{
     title: "Dylan Harness"
 }, {
     title: "Hannes Filler"
+}, {
+    title: "Batman Doyle"
 }];
 
 var img = new UI.Image({
     position: new Vector2(0, 0),
-    size: new Vector2(144, 168),
+    size: new Vector2(128, 128),
     image: 'images/home-128.png'
 });
+
+// var hannes = new UI.Image({
+//     position: new Vector2(0, 0),
+//     size: new Vector2(144, 168),
+//     image: 'images/hannes.png'
+// });
 
 var wind = new UI.Window({
     fullscreen: true
@@ -115,16 +125,8 @@ MainMenu.on('select', function(event) {
     if (mitems[event.itemIndex].title == "Punch!") {
         canPunch = true;
 
-        var win = new UI.Window();
-        // var img = new UI.Image({
-        //     image: 'images/home-128.png'
-        // });
 
-        // win.add(img);
-        // win.remove(img);
-        win.show();
-        // punchCard.show();
-
+        punchCard.show();
 
 
     } else if (mitems[event.itemIndex].title == "High Score") {
@@ -140,27 +142,22 @@ MainMenu.on('select', function(event) {
         });
 
         detailCard.on('select', function(event) {
-            Vibe.vibrate('short');
-            if (us[event.itemIndex].title == "Ryan Holmes") {
-                //ryan about page
-                var win = new UI.Window();
-                var img = new UI.Image({
-                    image: 'images/home-128.png'
-                });
+            //Vibe.vibrate('short');
 
-                win.add(img);
-                win.remove(img);
-                win.show();
-                // punchCard.show();
+            var second_wind = new UI.Window({
+                fullscreen: true,
+                backgroundColor: 'white'
+            });
 
-
-            } else if (us[event.itemIndex].title == "Dylan Harness") {
-                //dylan about page
-
-            } else {
-                //hannes about page
+            if (us[event.itemIndex].title == 'Ryan Holmes') {
 
             }
+            if (us[event.itemIndex].title == 'Dylan Harness') {}
+            if (us[event.itemIndex].title == 'Hannes Filler') {
+                second_wind.add(img);
+                second_wind.show();
+            }
+
         });
 
         detailCard.show();

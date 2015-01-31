@@ -30,7 +30,7 @@
             "file": "fonts/UbuntuMono-Regular.ttf"
         }, {
             "type": "png",
-            "name": "punch",
+            "name": "IMAGE_PUNCH",
             "file": "images/home-128.png"
         }]
     }
