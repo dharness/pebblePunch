@@ -7,7 +7,7 @@ var activeUsers = 0;
 var ejs = require('ejs');
 var port = 6113;
 var mongoose  = require('mongoose');
-
+var HighScore     = require('./models/Score');
 var codeId = 1;
 
 
@@ -28,11 +28,77 @@ app.post('/',function(req,res){
 	req.on('data',function(chunk){
 		data += chunk;
 	});
-	req.on('end',function(chunk){
+	req.on('end',function(){
 		console.log(data);
+		try{
+			var jsonData = JSON.parse(data);
+			var scoreVal = Math.sqrt((jsonData.magX*jsonData.magX) +(jsonData.magY*jsonData.magY) +(jsonData.magZ*jsonData.magZ));
+			var response = {};
+			response['newHighScore'] = false;
+			HighScore.count({_id: jsonData.id}, function (err, count) {
+				console.log(count);
+				if(!count){
+					//first time
+					var score = new HighScore({
+						_id: jsonData.id,
+						score: scoreVal
+					});
+					response['newHighScore'] = true;
+					score.save(function(err){
+								if(err) response['error'] = err;
+							});
+					getHighScore(response,score,function(response){
+						res.send(response);
+					});
+				} else {
+					// get your last high score
+					HighScore.findById(jsonData.id, function(err, oldHighScore) {
+						console.log(scoreVal);
+						//did you beat your high score?
+						if(scoreVal > oldHighScore.score){
+							response['newHighScore'] = true;
+							oldHighScore.score = scoreVal;
+							oldHighScore.updatedDate = Date.now();
+							oldHighScore.save(function(err){
+								if(err) response['error'] = err;
+							});
+						}
+						getHighScore(response,oldHighScore,function(response){
+							res.send(response);
+						});
+					});
+				}
+				//res.send('{"highScore":100,"personalHighScore":50,"Ranking":5}');
+			});
+		} catch(err){
+			console.log(err);
+			res.send(err);
+		}
 	});
-	res.send('hello world');
+	
+	
 });
+
+function getHighScore(response,scoreItem, callback){
+	//get the high score and send it back
+	console.log(response);
+	response['personalHighScore'] = scoreItem.score;
+	HighScore.count({	
+						_id:{'$ne': scoreItem._id }, 
+						score: {"$gte":scoreItem.score}
+					},
+		function (err, count) {
+			console.log(count);
+			response['Ranking'] = count +1;
+			HighScore.findOne()
+					 .sort('-score')  // give me the max
+					 .exec(function (err, member) {
+					 	 response['highScore'] = member.score;
+					 	 callback(response);
+					 });	 
+		});
+}
+
 
 
 // ========= LOAD CONFIG AND LAUNCH ============= //
