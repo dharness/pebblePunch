@@ -40,6 +40,9 @@ var mitems = [{
 }, {
     title: "High Score",
     subtitle: "Compete!"
+}, {
+    title: "About",
+    subtitle: "The Team"
 }];
 
 // Create the Menu, supplying the list of fruits
@@ -54,16 +57,15 @@ MainMenu.show();
 
 // Add a click listener for select button click
 MainMenu.on('select', function(event) {
-    Vibe.vibration('short');
+    Vibe.vibrate('short');
 
     // Show a card with clicked item details
     var detailCard = new UI.Card({
-        title: 'Punch!',
-        icon: 'resources/images/punch.png.pbi'
+        title: mitems[event.itemIndex].title
+        //icon: 'resources/images/punch.png.pbi'
     });
-
-    // Show the new Card
     detailCard.show();
+
 });
 
 // -------------------- ACCELOROMETER --------------------
