@@ -48,6 +48,7 @@ var Engine = {
                 punchCard.title('Highscore: ' + data.highScore);
                 punchCard.subtitle('Score: ' + punch);
                 punchCard.icon('images/menu_icon.png');
+                Vibe.vibrate('short');
             },
             function(error) {
                 // Failure!
@@ -78,6 +79,8 @@ var us = [{
     title: "Dylan Harness"
 }, {
     title: "Hannes Filler"
+}, {
+    title: "Batman Doyle"
 }];
 
 var img = new UI.Image({
@@ -114,18 +117,7 @@ MainMenu.on('select', function(event) {
 
     if (mitems[event.itemIndex].title == "Punch!") {
         canPunch = true;
-
-        var win = new UI.Window();
-        var img = new UI.Image({
-            image: 'images/home-128.png'
-        });
-
-        win.add(img);
-        win.remove(img);
-        win.show();
-        // punchCard.show();
-
-
+        punchCard.show();
 
     } else if (mitems[event.itemIndex].title == "High Score") {
         wind.add(img);
@@ -137,6 +129,15 @@ MainMenu.on('select', function(event) {
                 title: 'Menu',
                 items: us
             }]
+        });
+
+        detailCard.on('select', function(event) {
+            Vibe.vibrate('short');
+
+            if (us[event.itemIndex].title == 'Ryan Holmes') {
+            }
+            if (us[event.itemIndex].title == 'Dylan Harness') {}
+            if (us[event.itemIndex].title == 'Hannes Filler') {}
         });
 
         detailCard.show();
