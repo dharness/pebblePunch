@@ -23,9 +23,11 @@ sockets.extractSessionId = function(socket, type){
 
 sockets.punch = function (target, strength){
 	//default strength
-	strength = typeof strength !== 'undefined' ? strength : 800;
-	var socket = this.get(target);
-	socket.emit('punch',strength);
+	if(typeof _sockets[target] !== 'undefined'){
+		strength = typeof strength !== 'undefined' ? strength : 800;
+		var socket = this.get(target);
+		socket.emit('punch',strength);
+	}
 }
 
 
