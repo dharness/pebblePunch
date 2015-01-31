@@ -25,7 +25,7 @@ var Engine = {
         // console.log(canPunch)
         for (var i = 0; i < accels.length && canPunch; i += 2) {
             var magS = accels[i].x + accels[i + 1].x;
-            if (magS > 2000) {
+            if (magS > 1500) {
                 console.log('PUNCH' + magS);
                 callback(magS);
                 return;
@@ -35,7 +35,7 @@ var Engine = {
 
     sendPunch: function(punch, puncher) {
         ajax({
-                url: 'http://104.131.88.222:6113',
+                url: 'http://104.131.88.222:6113/walk',
                 method: 'POST',
                 data: {
                     id: Pebble.getWatchToken(),
