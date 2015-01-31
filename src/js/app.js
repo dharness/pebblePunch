@@ -19,6 +19,7 @@ var punchCard = new UI.Card({
 
 // -------------------- ENGINE --------------------
 
+
 var Engine = {
     //takes an array of data and determines if a punch has occurred
     lookForPunch: function(accels, callback) {
@@ -85,9 +86,15 @@ var us = [{
 
 var img = new UI.Image({
     position: new Vector2(0, 0),
-    size: new Vector2(144, 168),
+    size: new Vector2(128, 128),
     image: 'images/home-128.png'
 });
+
+// var hannes = new UI.Image({
+//     position: new Vector2(0, 0),
+//     size: new Vector2(144, 168),
+//     image: 'images/hannes.png'
+// });
 
 var wind = new UI.Window({
     fullscreen: true
@@ -117,7 +124,10 @@ MainMenu.on('select', function(event) {
 
     if (mitems[event.itemIndex].title == "Punch!") {
         canPunch = true;
+
+
         punchCard.show();
+
 
     } else if (mitems[event.itemIndex].title == "High Score") {
         wind.add(img);
@@ -132,12 +142,22 @@ MainMenu.on('select', function(event) {
         });
 
         detailCard.on('select', function(event) {
-            Vibe.vibrate('short');
+            //Vibe.vibrate('short');
+
+            var second_wind = new UI.Window({
+                fullscreen: true,
+                backgroundColor: 'white'
+            });
 
             if (us[event.itemIndex].title == 'Ryan Holmes') {
+
             }
             if (us[event.itemIndex].title == 'Dylan Harness') {}
-            if (us[event.itemIndex].title == 'Hannes Filler') {}
+            if (us[event.itemIndex].title == 'Hannes Filler') {
+                second_wind.add(img);
+                second_wind.show();
+            }
+
         });
 
         detailCard.show();
