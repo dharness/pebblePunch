@@ -517,22 +517,26 @@ static void handle_image_packet(Simply *simply, Packet *data) {
 }
 
 static void handle_card_clear_packet(Simply *simply, Packet *data) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "card clear");
   CardClearPacket *packet = (CardClearPacket*) data;
   simply_ui_clear(simply->ui, packet->flags);
 }
 
 static void handle_card_text_packet(Simply *simply, Packet *data) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "card text");
   CardTextPacket *packet = (CardTextPacket*) data;
   simply_ui_set_text(simply->ui, MIN(NumUiTextfields - 1, packet->index), packet->text);
 }
 
 static void handle_card_image_packet(Simply *simply, Packet *data) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "card image");
   CardImagePacket *packet = (CardImagePacket*) data;
   simply->ui->ui_layer.imagefields[MIN(NumUiImagefields - 1, packet->index)] = packet->image;
   window_stack_schedule_top_window_render();
 }
 
 static void handle_card_style_packet(Simply *simply, Packet *data) {
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "card style");
   CardStylePacket *packet = (CardStylePacket*) data;
   simply_ui_set_style(simply->ui, packet->style);
 }

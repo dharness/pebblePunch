@@ -12,6 +12,10 @@ var Vibe = require('ui/vibe');
 Accel.init();
 canPunch = false;
 puncher = Pebble.getWatchToken();
+var punchCard = new UI.Card({
+    title: 'IIII',
+    subtitle: 'pppp'
+});
 
 // -------------------- ENGINE --------------------
 
@@ -41,7 +45,9 @@ var Engine = {
                 contentType: "application/json; charset=utf-8",
             },
             function(data) {
-                // console.log(data);
+                punchCard.title('Highscore: ' + data.highScore);
+                punchCard.subtitle('Score: ' + punch);
+                punchCard.icon('images/menu_icon.png');
             },
             function(error) {
                 // Failure!
@@ -94,19 +100,32 @@ var MainMenu = new UI.Menu({
 
 MainMenu.show();
 
+// function displayScore(score, highScore) {
+//     punchCard = new UI.Card({
+//         title: 'Highscore: ' + highScore,
+//         subtitle: 'Score: ' + score
+//     });
+//     punchCard.show();
+// }
+
 // Add a click listener for select button click
 MainMenu.on('select', function(event) {
     Vibe.vibrate('short');
 
     if (mitems[event.itemIndex].title == "Punch!") {
         canPunch = true;
-        console.log(Pebble)
 
-        var detailCard = new UI.Card({
-            title: 'Your Highscore is: ' + 'highScore',
-            subtitle: ''
+        var win = new UI.Window();
+        var img = new UI.Image({
+            image: 'images/home-128.png'
         });
-        detailCard.show();
+
+        win.add(img);
+        win.remove(img);
+        win.show();
+        // punchCard.show();
+
+
 
     } else if (mitems[event.itemIndex].title == "High Score") {
         wind.add(img);
@@ -125,6 +144,7 @@ MainMenu.on('select', function(event) {
         console.log("what? how even?");
     }
 });
+
 
 // -------------------- ACCELOROMETER --------------------
 
