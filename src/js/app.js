@@ -86,6 +86,10 @@ var img = new UI.Image({
     image: 'images/home-128.png'
 });
 
+var wind = new UI.Window({
+    fullscreen: true
+});
+
 // Create the Menu, supplying the list of fruits
 var MainMenu = new UI.Menu({
     sections: [{
@@ -102,17 +106,14 @@ MainMenu.on('select', function(event) {
 
     if (mitems[event.itemIndex].title == "Punch!") {
         var detailCard = new UI.Card({
-            //title: 'wooot',
-            icon: "img"
-        });
-
-        detailCard.show();
-    } else if (mitems[event.itemIndex].title == "High Score") {
-        var detailCard = new UI.Card({
             title: 'wooot'
         });
-
         detailCard.show();
+
+    } else if (mitems[event.itemIndex].title == "High Score") {
+        wind.add(img);
+        wind.show();
+
     } else if (mitems[event.itemIndex].title == "About") {
         var detailCard = new UI.Menu({
             sections: [{
