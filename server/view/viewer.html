@@ -16,7 +16,7 @@
 	<script type="text/javascript">
 			var socket = io();
 			socket.on('identify', function(id){
-				socket.emit('coupleing','138.51.204.150');
+				socket.emit('couple','138.51.204.150');
 			});
 			socket.on('punch',punch);
 
@@ -176,10 +176,9 @@
 			}
 			function punch(strength){
 				console.log('OW, that hurt like '+strength + ' badgers');
-				if(swingfactor == 0){
-					swingfactor = strength;
-					interalSwingFactor = strength;
-				}
+				swingfactor = strength;
+				interalSwingFactor = strength;
+
 			}
 		</script>
 </html>
