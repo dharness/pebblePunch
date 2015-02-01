@@ -2,16 +2,26 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
 	</head>
 <body>
+	<table>
+	<tr>
+		<td>
 	<div id="chartContainer" style="height: 500px; width: 500px">
 	</div>
+		</td>
+		<td>
+	<div id="chartContainer2" style="height: 500px; width: 500px">
+	</div>
+		</td>
+	</tr>
+</table>
 		<script type="text/javascript">
-			var socket = io();
-			data = [];
-			max = 1000;
+			//var socket = io();
+			var data = [];
+			var tmpArray = [];
+			/*max = 1000;
 			min = -1000;
 			socket.on('identify', function(id){
 				console.log('I am '+id);
@@ -27,13 +37,33 @@
 					if(newPoint[i] < min) min = newPoint[i];
 				}
 				updateData();
-			});
+			});*/
+	var counter = 0;
+	max = 10;
+	min = -10;
+	setInterval(updateData,300);
+	
 	function updateData() {
+		var newPoint = {x:Math.random()*1000,y:Math.random()*1000}
+		for(var i in newPoint){
+			if(newPoint[i] > max) max = newPoint[i];
+			if(newPoint[i] < min) min = newPoint[i];
+		}
+		tmpArray.push(newPoint);
+counter++
+console.log(counter);
+console.log(data)
+console.log(tmpArray)
+	if(counter >= 5){
+		for(var i = 0; i<tmpArray.length; i++){
+			data.push(tmpArray[i]);
+		}
+		tmpArray = [];
 		var chart = new CanvasJS.Chart("chartContainer",
 		{
 			zoomEnabled: true,
 			title:{
-				text: "X - Y Values",
+				text: "X - Y Values - Accelleration",
 				fontSize: 20
 				
 			},  
@@ -55,15 +85,50 @@
 			data: [
 			{        
 				type: "scatter",  
-              toolTipContent: "<span style='\"'color: {color};'\"'><strong>Area: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>Price: </strong></span>{y} $ ",
+              toolTipContent: "<span style='\"'color: {color};'\"'><strong>x: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>y: </strong></span>{y}",
 
 				dataPoints: data
 			}
 			
 			]
 		});
+		var chart2 = new CanvasJS.Chart("chartContainer2",
+		{
+			zoomEnabled: true,
+			title:{
+				text: "X - Y Values - Jerk",
+				fontSize: 20
+				
+			},  
+                        animationEnabled: true,
+			axisX: {
+				minimum: min,
+              //labelAngle: -40,
+				maximum: max,
+				labelFontSize: 14,
+				titleFontSize: 18                            
+			},
+			axisY:{
+				minimum: min,
+				maximum: max,
+				labelFontSize: 14,
+				titleFontSize: 18
+			},
 
-chart.render();
+			data: [
+			{        
+				type: "scatter",  
+              toolTipContent: "<span style='\"'color: {color};'\"'><strong>x: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>y: </strong></span>{y}",
+
+				dataPoints: data
+			}
+			
+			]
+		});
+		counter = 0;
+		chart.render();
+		chart2.render();
+	}
 }
 		</script>
 	</body>

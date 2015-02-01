@@ -26,7 +26,7 @@ app.post('/data',function(req,res){
 			console("JSON ERROR:" + err);
 		}
 		if(typeof IpIdMap[req.ip] !== 'undefined'){
-			database.save(req.ip,IpIdMap[req.ip],data,data.name)
+			database.save(req.ip,IpIdMap[req.ip],data,data.moveName)
 			res.sendStatus(200);
 		} else {
 			res.send('Please buy a Pebble to use this service.');
