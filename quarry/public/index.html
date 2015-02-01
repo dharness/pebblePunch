@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
+	</head>
+<body>
+	<div id="chartContainer" style="height: 500px; width: 500px">
+	</div>
+		<script type="text/javascript">
+			var socket = io();
+			data = [];
+			max = 1000;
+			min = -1000;
+			socket.on('identify', function(id){
+				console.log('I am '+id);
+				socket.emit('couple','138.51.204.150');
+			});
+			socket.on('point',function(dataInstance){
+				var newPoint = JSON.parse(dataInstance);
+				data.push(newPoint);
+				for(var i in newPoint){
+					if(newPoint[i] > max) max = newPoint[i];
+					if(newPoint[i] < min) min = newPoint[i];
+				}
+				updateData();
+			});
+	function updateData() {
+		var chart = new CanvasJS.Chart("chartContainer",
+		{
+			zoomEnabled: true,
+			title:{
+				text: "X - Y Values",
+				fontSize: 20
+				
+			},  
+                        animationEnabled: true,
+			axisX: {
+				minimum: min,
+              //labelAngle: -40,
+				maximum: max,
+				labelFontSize: 14,
+				titleFontSize: 18                            
+			},
+			axisY:{
+				minimum: min,
+				maximum: max,
+				labelFontSize: 14,
+				titleFontSize: 18
+			},
+
+			data: [
+			{        
+				type: "scatter",  
+              toolTipContent: "<span style='\"'color: {color};'\"'><strong>Area: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>Price: </strong></span>{y} $ ",
+
+				dataPoints: data
+			}
+			
+			]
+		});
+
+chart.render();
+}
+		</script>
+	</body>
+</html>
