@@ -1,6 +1,8 @@
 var sockets = {};
 var _sockets = {};
 
+var _viewers = {};
+
 // IP addressses are used to map 
 sockets.save = function(socket, callback){
 	if(typeof socket == 'object'){
@@ -13,8 +15,19 @@ sockets.save = function(socket, callback){
 sockets.remove = function(socketId){
 	delete _sockets[socketId];
 }
+
+sockets.addViewer = function(sourceSocket, destSocket){
+	if (typeof _viewers[destSocket] == 'undefined') _viewers[destSocket] = [];
+	_viewers[destSocket].push(_sockets[sourceSocket]);
+	this.remove(sourceSocket);
+}
 sockets.get = function(socketId){
-	return _sockets[socketId];
+	var res = [];
+	res.push(_sockets[socketId]);
+	for (var i = 0; i< _viewers[socketId]; i++){
+			res.push(_viewers[socketId][i]);		
+	}
+	return res;
 }
 sockets.extractSessionId = function(socket, type){
 	//get IP
@@ -26,7 +39,9 @@ sockets.punch = function (target, strength){
 	if(typeof _sockets[target] !== 'undefined'){
 		strength = typeof strength !== 'undefined' ? strength : 800;
 		var socket = this.get(target);
-		socket.emit('punch',strength);
+		for(var i = 0; i< socket.length; i++){
+			socket[i].emit('punch',strength);
+		}
 	}
 }
 

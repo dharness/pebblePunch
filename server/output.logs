@@ -1,0 +1,707 @@
+starting on port:6113
+active users:1
+GET received
+active users:2
+active users:1
+GET received
+active users:2
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+GET received
+GET received
+active users:3
+GET received
+active users:2
+active users:3
+GET received
+active users:2
+active users:3
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:3
+GET received
+active users:2
+active users:3
+GET received
+active users:2
+active users:3
+GET received
+active users:2
+active users:3
+active users:2
+GET received
+active users:1
+active users:2
+GET received
+active users:1
+active users:2
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]
+POST received
+{}
+[TypeError: Cannot call method 'emit' of undefined]

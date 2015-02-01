@@ -11,16 +11,23 @@ var codeId = 1;
 var database	= require('./lib/database');
 var sockets = require('./lib/sockets');
 
-
+// ============= 		PUBLIC ACCESS	 	============= //
 app.get('/',function(req,res){
 	console.log("GET received");
 	res.sendFile('view/index.html', {root: __dirname} );
+});
+app.get('/:var',function(req,res){
+	res.sendFile('view/'+req.param('var'), {root: __dirname} );
 });
 app.get('/js/:var',function(req,res){
 	res.sendFile('view/js/'+req.param('var'), {root: __dirname} );
 });
 app.get('/images/:var',function(req,res){
 	res.sendFile('view/images/'+req.param('var'), {root: __dirname} );
+});
+// ============= 	SPYING/VIEWING MODE	 	============= //
+app.get('/display/:ip',function(req,res){
+	sockets.addViewer(req.ip,req.param('ip'));
 });
 
 // ============= 	PULLING THE PUNCHES	 	============= //
@@ -59,6 +66,10 @@ io.on('connection',function(socket){
   	});
   	socket.emit("identify",sockets.extractSessionId(socket));
   	sockets.save(socket);
+
+  	socket.on('connect-as-viewer',function(ip){
+
+  	})
 });
 
 
