@@ -43,12 +43,10 @@ database.save = function(ipAddr,smartId,jsonData, name){
 	});
 }
 
-database.retrieve = function(smartId){
+database.retrieve = function(smartId, callback){
 	DeveloperAccount.find({watchId:smartId}, function(err,docs){
 		if(err) console.log(err);
 		console.log(docs);
-		for(var i=0; i< docs.lengthl i++){
-			
-		}
+		callback(docs);
 	});
 }

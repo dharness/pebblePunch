@@ -3,6 +3,9 @@
 	<head>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
 	</head>
 <body>
@@ -16,6 +19,20 @@
 	<div id="chartContainer2" style="height: 500px; width: 500px">
 	</div>
 		</td>
+		<td>
+			<div>
+				<form id = 'application' action='/data' method='POST'>
+					<div>
+						<span><b>Box</b> (Items inside are accepted)</span><br>
+						<input type='Text'class= 'pull-right' name='lt' placeholder='{x:15,y:0}'></input><br>
+						<input type='Text'class= 'pull-right' name='br' placeholder='{x:-30,y:250}'></input>
+					</div>
+					<button id='addBoxButton' class = 'pull-right btn-default'>new Box</button>
+
+					<button id='submit' class = 'btn-default'>Submit</button>
+				</form>
+			</div>
+		</td>
 	</tr>
 </table>
 		<script type="text/javascript">
@@ -23,6 +40,7 @@
 			var data = [];
 			var data_jerk = [];
 			var tmpArray = [];
+			var key;
 			max = 1000;
 			min = -1000;
 			socket.on('identify', function(id){
@@ -32,7 +50,9 @@
 				}
 			});
 			socket.on('point',function(dataInstance){
+
 				var newPoint = JSON.parse(dataInstance);
+				if(typeof key == 'undefined')key = newPoint.id;
 				data.push(newPoint);
 				for(var i in newPoint){
 					if(newPoint[i] > max) max = newPoint[i];
@@ -49,16 +69,13 @@
 		}
 		tmpArray.push(newPoint);
 counter++
-console.log(counter);
-console.log(data)
-console.log(tmpArray)
 	if(counter >= 5){
 		for(var i = 0; i<tmpArray.length; i++){
 			data.push(tmpArray[i]);
 			if(data.length != 1){
 				var tmpDataItem = {};
-				tmpDataItem['x'] = Math.abs(data[data.length-1].x - data[data.length-2].x);
-				tmpDataItem['y'] = Math.abs(data[data.length-1].y - data[data.length-2].y);
+				tmpDataItem['x'] = (data[data.length-1].x - data[data.length-2].x);
+				tmpDataItem['y'] = (data[data.length-1].y - data[data.length-2].y);
 				data_jerk.push(tmpDataItem);
 			}
 		}
@@ -89,7 +106,7 @@ console.log(tmpArray)
 			data: [
 			{        
 				type: "scatter",  
-              toolTipContent: "<span style='\"'color: {color};'\"'><strong>x: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>y: </strong></span>{y}",
+              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
 
 				dataPoints: data
 			}
@@ -122,7 +139,7 @@ console.log(tmpArray)
 			data: [
 			{        
 				type: "scatter",  
-              toolTipContent: "<span style='\"'color: {color};'\"'><strong>x: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>y: </strong></span>{y}",
+              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
 
 				dataPoints: data_jerk
 			}
@@ -133,6 +150,18 @@ console.log(tmpArray)
 		chart.render();
 		chart2.render();
 	}
+}
+window.onload = bind;
+function bind(){
+	$('#addBoxButton').on('click', function(e,element){
+		alert('this should happen')
+		$('#addBoxButton').insertBefore("<label>Box</label><input type='Text' placeholder='{x:15,y:25}'/><input type='Text' placeholder='{x:15,y:25}'/>");
+
+	})
+	$('#application').on('submit',function(event){
+		event.preventDefault();
+		alert('the fuck?');
+	});
 }
 		</script>
 	</body>
