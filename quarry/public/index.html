@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
 	</head>
 <body>
@@ -18,8 +19,9 @@
 	</tr>
 </table>
 		<script type="text/javascript">
-			//var socket = io();
+			var socket = io();
 			var data = [];
+			var data_jerk = [];
 			var tmpArray = [];
 			max = 1000;
 			min = -1000;
@@ -53,6 +55,7 @@ console.log(tmpArray)
 	if(counter >= 5){
 		for(var i = 0; i<tmpArray.length; i++){
 			data.push(tmpArray[i]);
+			if(data.length != 1) data_jerk.push(Math.abs(data[data.length-1] - data[data.length-2]));
 		}
 		tmpArray = [];
 		var chart = new CanvasJS.Chart("chartContainer",
@@ -116,7 +119,7 @@ console.log(tmpArray)
 				type: "scatter",  
               toolTipContent: "<span style='\"'color: {color};'\"'><strong>x: </strong></span>{x} sq.ft<br/><span style='\"'color: {color};'\"'><strong>y: </strong></span>{y}",
 
-				dataPoints: data
+				dataPoints: data_jerk
 			}
 			
 			]
