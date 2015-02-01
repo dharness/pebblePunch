@@ -15,7 +15,9 @@
 			min = -1000;
 			socket.on('identify', function(id){
 				console.log('I am '+id);
-				socket.emit('couple','138.51.204.150');
+				if( id !== '138.51.204.150'){
+					socket.emit('couple','138.51.204.150');
+				}
 			});
 			socket.on('point',function(dataInstance){
 				var newPoint = JSON.parse(dataInstance);

@@ -5,6 +5,7 @@ var sockets = require('./lib/sockets');
 var fs = require('fs');
 var port;
 
+var IpIdMap = {};
 
 // ============= 		PUBLIC ACCESS	 	============= //
 app.get('/',function(req,res){
@@ -24,18 +25,20 @@ app.post('/data',function(req,res){
 		} catch(err){
 			console("JSON ERROR:" + err);
 		}
-		for (var i =0; i< data.length; i++){
-			if(data[i].type == "Circle"){
-				// handle CIRCLE
-				
-			} 
-				else //if(type  == "Box")
-			{
-				// handle BOX;
-				
+		if(typeof IpIdMap[req.ip] !== 'undefined'){
+			for (var i =0; i< data.length; i++){
+				if(data[i].type == "Circle"){
+					// handle CIRCLE
+				} 
+					else //if(type  == "Box")
+				{
+					// handle BOX;
+				}
 			}
+			res.sendStatus(200);
+		} else {
+			res.send('Please buy a Pebble to use this service.');
 		}
-		res.sendStatus(200);
 	});
 });
 
@@ -47,6 +50,10 @@ app.post('/',function(req,res){
 		data += chunk;
 	});
 	req.on('end',function(err){
+		if(typeof IpIdMap[req.ip] == 'undefined'){
+			IpIdMap[req.ip] = data.id;
+			IpIdMap[data.id] = req.ip;
+		}
 		console.log(req.ip + ' '+data +'point')
 		sockets.send(req.ip,data,'point');
 		res.send(200)
