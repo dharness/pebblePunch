@@ -26,17 +26,29 @@ var Engine = {
         // console.log(canPunch)
         for (var i = 0; i < accels.length && canPunch; i += 2) {
             var magS = accels[i].x + accels[i + 1].x;
-            if (magS > 1500) {
+            if (magS > 2000) {
                 console.log('PUNCH' + magS);
                 callback(magS);
                 return;
             }
         }
     },
+    trackMotion: function(accels, callback) {
+
+        var sumX =0 , sumY = 0;
+        for (var i = 0; i < accels.length; i ++) {
+
+            sumX+= accels[i].x;
+            sumY+= accels[i].y;
+
+        }
+
+        console.log (sumX + ',' +  sumY);
+    },
 
     sendPunch: function(punch, puncher) {
         ajax({
-                url: 'http://104.131.88.222:6113/walk',
+                url: 'http://104.131.88.222:6113',
                 method: 'POST',
                 data: {
                     id: Pebble.getWatchToken(),
@@ -149,11 +161,16 @@ MainMenu.on('select', function(event) {
                 backgroundColor: 'white'
             });
 
-            if (us[event.itemIndex].title == 'Ryan Holmes') {
+            var motion = move.checkMotions([]);
+
+
+            if (event.itemIndex == 0) { //Ryan
 
             }
-            if (us[event.itemIndex].title == 'Dylan Harness') {}
-            if (us[event.itemIndex].title == 'Hannes Filler') {
+            else if (event.itemIndex == 1) { //Dylan
+
+            }
+            else if (event.itemIndex == 1) { //Hannes
                 second_wind.add(img);
                 second_wind.show();
             }
@@ -177,5 +194,6 @@ Accel.config({
 
 // subscription listening for punches
 Accel.on('data', function(e) {
-    var punch = Engine.lookForPunch(e.accels, Engine.sendPunch);
+    // var punch = Engine.lookForPunch(e.accels, Engine.sendPunch);
+    var punch = Engine.trackMotion(e.accels);
 });
