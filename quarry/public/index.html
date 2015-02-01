@@ -21,7 +21,7 @@
 			//var socket = io();
 			var data = [];
 			var tmpArray = [];
-			/*max = 1000;
+			max = 1000;
 			min = -1000;
 			socket.on('identify', function(id){
 				console.log('I am '+id);
@@ -36,15 +36,11 @@
 					if(newPoint[i] > max) max = newPoint[i];
 					if(newPoint[i] < min) min = newPoint[i];
 				}
-				updateData();
-			});*/
+				updateData(newPoint);
+			});
 	var counter = 0;
-	max = 10;
-	min = -10;
-	setInterval(updateData,300);
-	
-	function updateData() {
-		var newPoint = {x:Math.random()*1000,y:Math.random()*1000}
+	function updateData(newPoint) {
+		//var newPoint = {x:Math.random()*1000,y:Math.random()*1000}
 		for(var i in newPoint){
 			if(newPoint[i] > max) max = newPoint[i];
 			if(newPoint[i] < min) min = newPoint[i];
