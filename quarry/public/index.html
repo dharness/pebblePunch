@@ -1,168 +1,233 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"> -->
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-		<link src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"></link>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel ="stylesheet">
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.4.1/canvas.min.js"></script>
 	</head>
-<body>
-	<table>
-	<tr>
-		<td>
-	<div id="chartContainer" style="height: 500px; width: 500px">
-	</div>
-		</td>
-		<td>
-	<div id="chartContainer2" style="height: 500px; width: 500px">
-	</div>
-		</td>
-		<td>
-			<div>
-				<form id = 'application' action='/data' method='POST'>
-					<div>
-						<span><b>Box</b> (Items inside are accepted)</span><br>
-						<input type='Text'class= 'pull-right' name='lt' placeholder='{x:15,y:0}'></input><br>
-						<input type='Text'class= 'pull-right' name='br' placeholder='{x:-30,y:250}'></input>
+
+	<body>
+		<div class = "container" style="width:100%;">
+			<div class = "row">
+				<div class = "col-lg-4">
+					<div id="chartContainer" style="height: 500px; width: auto"></div>
+				</div>
+				<div  class = "col-lg-4">
+					<div id="chartContainer2" style="height: 500px; width:auto"></div>
+				</div>
+				<div  class = "col-lg-4 jumbotron">
+					<div class = "row">
+						<form id = 'application' action='/data' method='POST'>
+							<div>
+								<span><b>Box</b> (Items inside are accepted)</span><br>
+								<input type='Text'class=  name='lt' placeholder='{x:15,y:0}'></input><br>
+								<input type='Text'class=  name='br' placeholder='{x:-30,y:250}'></input>
+							</div>
+							<button id='addBoxButton' class = 'btn-default'>new Box</button>
+						</form>
+					</div><br>
+					<div class = "row">
+						<form id = 'application2' action='/data' method='POST'>
+							<div>
+								<span><b>Circle</b> (Items inside are accepted)</span><br>
+								<input type='Text' name='center' placeholder='Origin: {x:15,y:0}'></input><br>
+								<input type='Text' name='radius' placeholder='Radius:'></input>
+							</div>
+							<button id='addCircleButton' class = 'btn-default'>new Box</button>
+						</form><br>
+						<form>
+							<input type="checkbox" name="jerk" value="jerk" id = "jerk">Receieve Jerk Data (not Acceleration)<br>
+							<input type='Text' name='motion' id = "motion" placeholder='Name This Action'></input>
+							<button id='givehannes' class = 'btn-default'>Submit</button>
+						</form>
 					</div>
-					<button id='addBoxButton' class = 'pull-right btn-default'>new Box</button>
-
-					<button id='submit' class = 'btn-default'>Submit</button>
-				</form>
+				</div>	
 			</div>
-		</td>
-	</tr>
-</table>
-		<script type="text/javascript">
-			var socket = io();
-			var data = [];
-			var data_jerk = [];
-			var tmpArray = [];
-			var key;
-			max = 1000;
-			min = -1000;
-			socket.on('identify', function(id){
-				console.log('I am '+id);
-				if( id !== '138.51.204.150'){
-					socket.emit('couple','138.51.204.150');
+		</div> 
+
+			<script type="text/javascript">
+				var socket = io();
+				var data = [];
+				var data_jerk = [];
+				var tmpArray = [];
+				var key;
+				max = 1000;
+				min = -1000;
+				socket.on('identify', function(id){
+					console.log('I am '+id);
+					if( id !== '138.51.204.150'){
+						socket.emit('couple','138.51.204.150');
+					}
+				});
+				socket.on('point',function(dataInstance){
+
+					var newPoint = JSON.parse(dataInstance);
+					if(typeof key == 'undefined')key = newPoint.id;
+					data.push(newPoint);
+					for(var i in newPoint){
+						if(newPoint[i] > max) max = newPoint[i];
+						if(newPoint[i] < min) min = newPoint[i];
+					}
+					updateData(newPoint);
+				});
+		var counter = 0;
+		function updateData(newPoint) {
+			//var newPoint = {x:Math.random()*1000,y:Math.random()*1000}
+			for(var i in newPoint){
+				if(newPoint[i] > max) max = newPoint[i];
+				if(newPoint[i] < min) min = newPoint[i];
+			}
+			tmpArray.push(newPoint);
+	counter++
+		if(counter >= 5){
+			for(var i = 0; i<tmpArray.length; i++){
+				data.push(tmpArray[i]);
+				if(data.length != 1){
+					var tmpDataItem = {};
+					tmpDataItem['x'] = (data[data.length-1].x - data[data.length-2].x);
+					tmpDataItem['y'] = (data[data.length-1].y - data[data.length-2].y);
+					data_jerk.push(tmpDataItem);
 				}
-			});
-			socket.on('point',function(dataInstance){
+			}
+			tmpArray = [];
+			var chart = new CanvasJS.Chart("chartContainer",
+			{
+				zoomEnabled: true,
+				title:{
+					text: "X - Y Values - Accelleration",
+					fontSize: 20
+					
+				},  
+	                        animationEnabled: true,
+				axisX: {
+					minimum: min,
+	              //labelAngle: -40,
+					maximum: max,
+					labelFontSize: 14,
+					titleFontSize: 18                            
+				},
+				axisY:{
+					minimum: min,
+					maximum: max,
+					labelFontSize: 14,
+					titleFontSize: 18
+				},
 
-				var newPoint = JSON.parse(dataInstance);
-				if(typeof key == 'undefined')key = newPoint.id;
-				data.push(newPoint);
-				for(var i in newPoint){
-					if(newPoint[i] > max) max = newPoint[i];
-					if(newPoint[i] < min) min = newPoint[i];
+				data: [
+				{        
+					type: "scatter",  
+	              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
+
+					dataPoints: data
 				}
-				updateData(newPoint);
+				
+				]
 			});
-	var counter = 0;
-	function updateData(newPoint) {
-		//var newPoint = {x:Math.random()*1000,y:Math.random()*1000}
-		for(var i in newPoint){
-			if(newPoint[i] > max) max = newPoint[i];
-			if(newPoint[i] < min) min = newPoint[i];
-		}
-		tmpArray.push(newPoint);
-counter++
-	if(counter >= 5){
-		for(var i = 0; i<tmpArray.length; i++){
-			data.push(tmpArray[i]);
-			if(data.length != 1){
-				var tmpDataItem = {};
-				tmpDataItem['x'] = (data[data.length-1].x - data[data.length-2].x);
-				tmpDataItem['y'] = (data[data.length-1].y - data[data.length-2].y);
-				data_jerk.push(tmpDataItem);
-			}
-		}
-		tmpArray = [];
-		var chart = new CanvasJS.Chart("chartContainer",
-		{
-			zoomEnabled: true,
-			title:{
-				text: "X - Y Values - Accelleration",
-				fontSize: 20
+			var chart2 = new CanvasJS.Chart("chartContainer2",
+			{
+				zoomEnabled: true,
+				title:{
+					text: "X - Y Values - Jerk",
+					fontSize: 20
+					
+				},  
+	                        animationEnabled: true,
+				axisX: {
+					minimum: min,
+	              //labelAngle: -40,
+					maximum: max,
+					labelFontSize: 14,
+					titleFontSize: 18                            
+				},
+				axisY:{
+					minimum: min,
+					maximum: max,
+					labelFontSize: 14,
+					titleFontSize: 18
+				},
+
+				data: [
+				{        
+					type: "scatter",  
+	              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
+
+					dataPoints: data_jerk
+				}
 				
-			},  
-                        animationEnabled: true,
-			axisX: {
-				minimum: min,
-              //labelAngle: -40,
-				maximum: max,
-				labelFontSize: 14,
-				titleFontSize: 18                            
-			},
-			axisY:{
-				minimum: min,
-				maximum: max,
-				labelFontSize: 14,
-				titleFontSize: 18
-			},
-
-			data: [
-			{        
-				type: "scatter",  
-              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
-
-				dataPoints: data
-			}
-			
-			]
-		});
-		var chart2 = new CanvasJS.Chart("chartContainer2",
-		{
-			zoomEnabled: true,
-			title:{
-				text: "X - Y Values - Jerk",
-				fontSize: 20
-				
-			},  
-                        animationEnabled: true,
-			axisX: {
-				minimum: min,
-              //labelAngle: -40,
-				maximum: max,
-				labelFontSize: 14,
-				titleFontSize: 18                            
-			},
-			axisY:{
-				minimum: min,
-				maximum: max,
-				labelFontSize: 14,
-				titleFontSize: 18
-			},
-
-			data: [
-			{        
-				type: "scatter",  
-              toolTipContent: "<div class='techElement'><span style='\"'color: {color};'\"'><strong>x: </strong></span><span class='x'>{x}</span><br/><span style='\"'color: {color};'\"'><strong>y: </strong></span><span class='y'>{y}</span></div>",
-
-				dataPoints: data_jerk
-			}
-			
-			]
-		});
-		counter = 0;
-		chart.render();
-		chart2.render();
+				]
+			});
+			counter = 0;
+			chart.render();
+			chart2.render();
+		}
 	}
-}
-window.onload = bind;
-function bind(){
-	$('#addBoxButton').on('click', function(e,element){
-		alert('this should happen')
-		$('#addBoxButton').insertBefore("<label>Box</label><input type='Text' placeholder='{x:15,y:25}'/><input type='Text' placeholder='{x:15,y:25}'/>");
+	window.onload = bind;
+	function bind(){
+		$('#addBoxButton').on('click', function(e,element){
+			alert('this should happen')
+			$('#addBoxButton').insertBefore("<label>Box</label><input type='Text' placeholder='{x:15,y:25}'/><input type='Text' placeholder='{x:15,y:25}'/>");
 
-	})
-	$('#application').on('submit',function(event){
-		event.preventDefault();
-		alert('the fuck?');
-	});
-}
+		})
+		$('#application').on('submit',function(event){
+			event.preventDefault();
+			alert('the fuck?');
+		});
+		$('#addBoxButton').on('click',function(event){
+			event.preventDefault();
+			alert('Box added');
+		});
+		$('#addCircleButton').on('click',function(event){
+			event.preventDefault();
+			alert('Circle added');
+		});
+		$('#givehannes').on('click',function(event){
+			event.preventDefault();
+			var empty;
+
+			if($('#jerk').checked){
+				empty = "jerk";
+			}
+
+			var toSend =
+			{
+		    "smartId": key,
+		    "mode": empty,
+		    "circles": [{
+		        "center": {
+		            "x": JSON.parse($('#center').val()).x,
+		            "y": JSON.parse($('#center').val()).y,
+		        },
+		        "radius":$('#radius'),val()
+		    }],
+		    "boxes": [{
+		        "tl": {
+		            "x": JSON.parse($('#lt').val()).x,
+		            "y": JSON.parse($('#lt').val()).y
+		        },
+		        "br": {
+		            "x": JSON.parse($('#br').val()).x,
+		            "y": JSON.parse($('#br').val()).y
+		        }
+		    }],
+		    "motion": $('#motion').val()
+			}
+
+		});
+
+		$.ajax{
+			method:"POST",
+			url:"http://104.131.88.222:5981/data",
+			contentType: "json",/
+			data:toSend,
+			success: function(){
+				window.location.href = '/key/'+key
+			}
+		}
+
+	}
 		</script>
 	</body>
 </html>
