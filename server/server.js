@@ -43,10 +43,10 @@ app.post('/',function(req,res){
 			data = JSON.parse(data);
 			// RESPOND TO PUNCH
 			var src		 = req.ip;
-			sockets.send(src,data,'punch');
+			sockets.send(src,data.magnitude,'punch');
 			
 			// LOG PUNCH
-			database.log(jsonData,function(response){
+			database.log(data,function(response){
 				res.send(response);
 			});
 		} catch(err){

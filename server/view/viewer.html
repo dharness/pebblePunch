@@ -40,9 +40,9 @@
 			    loader.load( "/example/js/practice.json", function(geometry,materials){
 			    	console.log('thing');
 			      boxing = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial( materials ));
-			      boxing.position.z = 3194;
-			      boxing.position.x = -1;
-			      boxing.position.y = 3;
+			      boxing.position.z = 3200;
+			      boxing.position.x = 4;
+			      boxing.position.y = 4;
 			      boxing.rotation.x = Math.PI;
 			      scene.add(boxing);
 			    });
@@ -176,9 +176,10 @@
 			}
 			function punch(strength){
 				console.log('OW, that hurt like '+strength + ' badgers');
-				swingfactor = strength;
-				interalSwingFactor = strength;
-
+				if(swingfactor == 0){
+					swingfactor = strength;
+					interalSwingFactor = strength;
+				}
 			}
 		</script>
 </html>
