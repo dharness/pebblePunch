@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var sockets = require('./lib/sockets');
 var fs = require('fs');
-var port = 6113;
+var port;
 
 
 // ============= 		PUBLIC ACCESS	 	============= //
@@ -12,6 +12,34 @@ app.get('/',function(req,res){
 	res.sendFile('public/index.html', {root: __dirname} );
 });
 
+app.post('/data',function(req,res){
+	var data = '';
+	req.on('data',function(chunk){
+		data += chunk;
+	});
+	req.on('end',function(err){
+		console.log(data);
+		try {
+			data = JSON.parse(data);
+		} catch(err){
+			console("JSON ERROR:" + err);
+		}
+		for (var i =0; i< data.length; i++){
+			if(data[i].type == "Circle"){
+				// handle CIRCLE
+				
+			} 
+				else //if(type  == "Box")
+			{
+				// handle BOX;
+				
+			}
+		}
+		res.sendStatus(200);
+	});
+});
+
+// ============= 		PUBLIC ACCESS	 	============= //
 app.post('/',function(req,res){
 	console.log('POST');
 	var data = '';
@@ -43,6 +71,7 @@ fs.exists('config/config.js',function(exists){
 	if(exists){
 		port = require('./config/config').port;
 	} else {
+		//dev
 		port = 6113;
 	}
 	http.listen(port, function(){
