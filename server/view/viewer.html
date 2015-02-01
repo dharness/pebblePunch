@@ -16,7 +16,7 @@
 	<script type="text/javascript">
 			var socket = io();
 			socket.on('identify', function(id){
-				console.log('I am '+id);
+				socket.emit('coupleing','138.51.204.150');
 			});
 			socket.on('punch',punch);
 
@@ -153,7 +153,7 @@
 			}
 
 			function render(dt) {
-				effect.render(scene, camera);
+				renderer.render(scene, camera);
 			}
 
 			function animate(t) {

@@ -33,7 +33,6 @@ sockets.get = function(socketId){
 }
 sockets.extractSessionId = function(socket, type){
 	//get IP
-	console.log(socket);
 	return socket.handshake.address;
 }
 

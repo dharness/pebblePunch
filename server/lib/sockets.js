@@ -24,25 +24,25 @@ sockets.addViewer = function(sourceSocket, destSocket){
 sockets.get = function(socketId){
 	var res = [];
 	res.push(_sockets[socketId]);
-	for (var i = 0; i< _viewers[socketId]; i++){
-			res.push(_viewers[socketId][i]);		
+	if(typeof _viewers[socketId] !=='undefined'){
+		for (var i = 0; i< _viewers[socketId].length; i++){
+				res.push(_viewers[socketId][i]);		
+		}
 	}
 	return res;
 }
-sockets.extractSessionId = function(socket, type){
+sockets.extractSessionId = function(socket){
 	//get IP
+	console.log(socket.handshake.address)
 	return socket.handshake.address;
 }
 
-sockets.punch = function (target, strength){
+sockets.send = function (target, data, action){
 	//default strength
-	if(typeof _sockets[target] !== 'undefined'){
-		strength = typeof strength !== 'undefined' ? strength : 800;
 		var socket = this.get(target);
 		for(var i = 0; i< socket.length; i++){
-			socket[i].emit('punch',strength);
+			if(typeof socket[i] !== 'undefined') socket[i].emit(action,data);
 		}
-	}
 }
 
 
