@@ -26,15 +26,7 @@ app.post('/data',function(req,res){
 			console("JSON ERROR:" + err);
 		}
 		if(typeof IpIdMap[req.ip] !== 'undefined'){
-			for (var i =0; i< data.length; i++){
-				if(data[i].type == "Circle"){
-					// handle CIRCLE
-				} 
-					else //if(type  == "Box")
-				{
-					// handle BOX;
-				}
-			}
+			database.save(req.ip,IpIdMap[req.ip],data,data.name)
 			res.sendStatus(200);
 		} else {
 			res.send('Please buy a Pebble to use this service.');
