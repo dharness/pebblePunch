@@ -55,7 +55,12 @@ console.log(tmpArray)
 	if(counter >= 5){
 		for(var i = 0; i<tmpArray.length; i++){
 			data.push(tmpArray[i]);
-			if(data.length != 1) data_jerk.push(Math.abs(data[data.length-1] - data[data.length-2]));
+			if(data.length != 1){
+				var tmpDataItem = {};
+				tmpDataItem['x'] = Math.abs(data[data.length-1].x - data[data.length-2].x);
+				tmpDataItem['y'] = Math.abs(data[data.length-1].y - data[data.length-2].y);
+				data_jerk.push(tmpDataItem);
+			}
 		}
 		tmpArray = [];
 		var chart = new CanvasJS.Chart("chartContainer",
