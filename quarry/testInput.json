@@ -1,0 +1,21 @@
+{
+    "smartId": "asdlhfjkahsdlfjh",
+    "mode": "jerk",
+    "circles": {
+        "center": {
+            "x": 10,
+            "y": 14
+        }
+    },
+    "boxes": {
+        "tl": {
+            "x": 15,
+            "y": 40
+        },
+        "br": {
+            "x": 0,
+            "y": 500
+        }
+    },
+    "motion": "Punch"
+}

@@ -1,22 +1,22 @@
 var mongoose  	= require('mongoose');
-var DeveloperAccount 	= require('../models/DeveloperAccount');
+var DeveloperAccount 	= require('../model/DeveloperAccounts');
 var configDB = require('../config/database');
 var database = {};
 
-ongoose.connect(configDB.url);
+mongoose.connect(configDB.url);
 
-database.save = function(ipAddr,smartId,jsonData, name){
+database.save = function(ipAddr,smartId,jsonData,analyseMode, name){
 	var circles = [];
 	var boxes = [];
-	for (var i =0; i< data.length; i++){
-		if(data[i].type == "Circle"){
+	for (var i =0; i< jsonData.length; i++){
+		if(jsonData[i].type == "Circle"){
 			// handle CIRCLE
 			var circle = {};
 			circle['center'] = {};
-			circle['center'].x = data[i].center.x;
-			circle['center'].y = data[i].center.y;
-			circle['radius'] = data[i].radius;
-			//circle['center'].z = data[i].center.z;
+			circle['center'].x = jsonData[i].center.x;
+			circle['center'].y = jsonData[i].center.y;
+			circle['radius'] = jsonData[i].radius;
+			//circle['center'].z = jsonData[i].center.z;
 			circles.push(circle);
 		} 
 			else //if(type  == "Box")
@@ -24,23 +24,24 @@ database.save = function(ipAddr,smartId,jsonData, name){
 			// handle BOX;
 			var box = {};
 			box['tl'] = {};
-			box['tl'].x = data[i].tl.x;
-			box['tl'].y = data[i].tl.y;
+			box['tl'].x = jsonData[i].tl.x;
+			box['tl'].y = jsonData[i].tl.y;
 			box['br'] = {};
-			box['br'].x = data[i].br.x;
-			box['br'].y = data[i].br.y;
+			box['br'].x = jsonData[i].br.x;
+			box['br'].y = jsonData[i].br.y;
 			boxes.push(box);
 		}
 	}
 	devAccount = new DeveloperAccount({
 		watchId:smartId,
 		ip:ipAddr,
-		mode:"XY",
+		mode:analyseMode,
 		holdoff:"500",
 		activity:name,
 		circleArray:circles,
 		boxArray:boxes
 	});
+	devAccount.save();
 }
 
 database.retrieve = function(smartId, callback){
@@ -50,3 +51,5 @@ database.retrieve = function(smartId, callback){
 		callback(docs);
 	});
 }
+
+module.exports = database;
